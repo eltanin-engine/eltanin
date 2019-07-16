@@ -1,6 +1,6 @@
 module LirithApp
-    module Systems
-    end
+  module Systems
+  end
 end
 
 require "./systems/*"

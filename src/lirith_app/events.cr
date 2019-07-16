@@ -3,5 +3,6 @@ module LirithApp
   end
 end
 
-require "./events/*"
 require "./events/render/*"
+require "./events/window/*"
+require "./events/console/*"

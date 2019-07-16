@@ -1,36 +1,32 @@
 module LirithApp
-    module Systems
-      class Window < Core::Systems::Base
-        enum Event
-          Close
-        end
+  module Systems
+    class Window < Lirith::Systems::Base
+      def initialize
+      end
 
-        def initialize
-        end
+      def shut_down
+        LibGLFW.terminate
+        Lirith::Managers::System.trigger_event(LirithApp::Events::Window::Closed)
 
-        def shut_down
-          LibGLFW.terminate
-          Managers::System.trigger_event(Event::Close)
+        true
+      end
 
-          true
-        end
+      def update
+        LibGLFW.poll_events
+      end
 
-        def update
-          LibGLFW.poll_events
-        end
+      def swap_buffers
+        Application::CORE.window.swap_buffers
+        # @window.swap_buffers
+      end
 
-        def swap_buffers
-          Application::CORE.window.swap_buffers
-          # @window.swap_buffers
-        end
-
-        def handle_event(event, payload)
-          case event
-          when Render::Event::PaintStart   ; update
-          when Render::Event::PaintFinalize; swap_buffers
-          when Render::Event::Stopped      ; shut_down
-          end
+      def handle_event(event)
+        case event
+        when Events::Render::StartPaint   ; update
+        when Events::Render::FinalizePaint; swap_buffers
+        when Events::Render::Stopped      ; shut_down
         end
       end
     end
+  end
 end
