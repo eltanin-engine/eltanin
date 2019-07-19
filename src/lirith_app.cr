@@ -9,6 +9,11 @@ module LirithApp
     CORE = Lirith::Systems::Application.new
 
     def setup
+      Lirith::Managers::System.instance.register(Lirith::Systems::Console.new([
+        LirithApp::Events::Render::EndPaint,
+        LirithApp::Events::Render::StartPaint,
+        LirithApp::Events::Render::FinalizePaint
+      ]))
       Lirith::Managers::System.instance.register(Systems::Window.new)
       Lirith::Managers::System.instance.register(Systems::Input.new)
       Lirith::Managers::System.instance.register(Systems::Render.new)

@@ -16,7 +16,7 @@ module LirithApp
           Lirith::Managers::System.trigger_event(Events::Render::EndPaint)
 
           Application::CORE.renderer.render(Application::CORE.scene, Application::CORE.camera)
-          LibGL.polygon_mode(LibGL::E_FRONT_AND_BACK, LibGL::E_LINE)
+          #LibGL.polygon_mode(LibGL::E_FRONT_AND_BACK, LibGL::E_LINE)
           LibGL.draw_arrays LibGL::E_TRIANGLES, 0, 12*3
 
           Lirith::Managers::System.trigger_event(Events::Render::FinalizePaint)

@@ -4,50 +4,27 @@ module LirithApp
       def initialize
         @model = Models::Cube.new
 
-        LibGL.gen_vertex_arrays 1, out @vertex_array_id
+        vertices = [] of Lirith::Math::Vector3
+        @model.vertices.each_slice(3).each do |vertex_attr|
+          vertices << Lirith::Math::Vector3.new(vertex_attr[0], vertex_attr[1], vertex_attr[2])
+        end
 
-        LibGL.gen_buffers 1, out @vertex_buffer
-        LibGL.gen_buffers 1, out @color_buffer
-      end
+        colors = [] of Lirith::Math::Vector3
+        @model.colors.each_slice(3).each do |color_attr|
+          colors << Lirith::Math::Vector3.new(color_attr[0], color_attr[1], color_attr[2])
+        end
 
-      def load_model
-        # Bind the VAO (vertex array object)
-        LibGL.bind_vertex_array @vertex_array_id
+        geometry = Lirith::Geometry.new(vertices)
+        geometry.vertex_colors = colors
+        mesh = Lirith::Mesh.new(geometry)
 
-        # Bind and set the VBO (vertex buffer object) data
-        LibGL.bind_buffer LibGL::E_ARRAY_BUFFER, @vertex_buffer
-        LibGL.buffer_data(
-          LibGL::E_ARRAY_BUFFER,
-          @model.vertices.size * sizeof(Float32),
-          @model.vertices.to_unsafe.as(Pointer(Void)),
-          LibGL::E_STATIC_DRAW
-        )
-
-        LibGL.bind_buffer(LibGL::E_ARRAY_BUFFER, @color_buffer)
-        LibGL.buffer_data(
-          LibGL::E_ARRAY_BUFFER,
-          @model.colors.size * sizeof(Float32),
-          @model.colors.to_unsafe.as(Pointer(Void)),
-          LibGL::E_STATIC_DRAW
-        )
-
-        # Enable and configure the attribute 0 for each vertex position
-        LibGL.enable_vertex_attrib_array 0_u32
-        LibGL.bind_buffer LibGL::E_ARRAY_BUFFER, @vertex_buffer
-        LibGL.vertex_attrib_pointer 0_u32, 3, LibGL::E_FLOAT, 0_u8, 0, nil
-
-        LibGL.enable_vertex_attrib_array 1_u32
-        LibGL.bind_buffer LibGL::E_ARRAY_BUFFER, @color_buffer
-        LibGL.vertex_attrib_pointer 1_u32, 3, LibGL::E_FLOAT, 0_u8, 0, nil
-
-        LibGL.enable LibGL::E_DEPTH_TEST
-        LibGL.depth_func LibGL::E_LESS
+        Application::CORE.scene.children << mesh
       end
 
       def handle_event(event)
-        case event
-        when Events::Render::Started; load_model
-        end
+        #case event
+        #when Events::Render::Started; load_model
+        #end
       end
     end
   end
