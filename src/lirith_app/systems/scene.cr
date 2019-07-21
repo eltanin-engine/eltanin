@@ -3,6 +3,8 @@ module LirithApp
     class Scene < Lirith::Systems::Base
       def initialize
         @model = Models::Cube.new
+        loader = Lirith::Loaders::JsonLoader.new
+        loader.load(File.open("./src/lirith_app/models/cube.json"))
 
         vertices = [] of Lirith::Math::Vector3
         @model.vertices.each_slice(3).each do |vertex_attr|
@@ -16,15 +18,15 @@ module LirithApp
 
         geometry = Lirith::Geometry.new(vertices)
         geometry.vertex_colors = colors
-        mesh = Lirith::Mesh.new(geometry)
+        mesh = Lirith::Objects::Mesh.new(geometry)
 
         Application::CORE.scene.children << mesh
       end
 
       def handle_event(event)
-        #case event
-        #when Events::Render::Started; load_model
-        #end
+        # case event
+        # when Events::Render::Started; load_model
+        # end
       end
     end
   end
