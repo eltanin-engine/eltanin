@@ -13,6 +13,7 @@ module LirithApp
         LirithApp::Events::Render::EndPaint,
         LirithApp::Events::Render::StartPaint,
         LirithApp::Events::Render::FinalizePaint,
+        LirithApp::Events::Render::Finalized
       ]))
       Lirith::Managers::System.instance.register(Systems::Window.new)
       Lirith::Managers::System.instance.register(Systems::Input.new)

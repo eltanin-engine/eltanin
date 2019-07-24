@@ -24,7 +24,7 @@ module LirithApp
         case event
         when Events::Render::StartPaint   ; update
         when Events::Render::FinalizePaint; swap_buffers
-        when Events::Render::Stopped      ; shut_down
+        when Lirith::Events::Application::Exit    ; shut_down
         end
       end
     end
