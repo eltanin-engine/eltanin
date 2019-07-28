@@ -6,8 +6,6 @@ require "./lirith_app/version"
 
 module LirithApp
   class Application < Lirith::Application
-    CORE = Lirith::Systems::Application.new
-
     def setup
       Lirith::Managers::System.instance.register(Lirith::Systems::Console.new([
         LirithApp::Events::Render::EndPaint,

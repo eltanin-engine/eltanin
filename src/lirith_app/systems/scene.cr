@@ -6,7 +6,7 @@ module LirithApp
         loader = Lirith::Loaders::JsonLoader.new
         mesh = loader.load(File.open("./src/lirith_app/models/cube.json"))
 
-        Application::CORE.scene.children << mesh
+        Lirith.application.scene.children << mesh
       end
 
       def handle_event(event)

@@ -16,7 +16,7 @@ module LirithApp
       end
 
       def swap_buffers
-        Application::CORE.window.swap_buffers
+        Lirith.application.window.swap_buffers
         # @window.swap_buffers
       end
 
