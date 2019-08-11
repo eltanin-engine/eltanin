@@ -12,6 +12,8 @@ module LirithApp
         LirithApp::Events::Render::StartPaint,
         LirithApp::Events::Render::FinalizePaint,
         LirithApp::Events::Render::Finalized,
+        Lirith::Events::Input::KeyPressed,
+        Lirith::Events::Input::KeyReleased,
       ]))
       Lirith::Managers::System.instance.register(Systems::Window.new)
       Lirith::Managers::System.instance.register(Systems::Input.new)

@@ -17,10 +17,10 @@ module LirithApp
         when Lirith::Input::Keys::A             ; @move_left = true
         when Lirith::Input::Keys::S             ; @move_backward = true
         when Lirith::Input::Keys::D             ; @move_right = true
-
         when Lirith::Input::Keys::Q             ; @translate_left = true
         when Lirith::Input::Keys::E             ; @translate_right = true
         when Lirith::Input::Keys::R             ; randomize_mesh
+        when Lirith::Input::Keys::H             ; debug_camera
         end
 
         Lirith.application.camera.update_view
@@ -28,28 +28,32 @@ module LirithApp
 
       def handle_key_release(key)
         case key
-        when Lirith::Input::Keys::W             ; @move_forward = false
-        when Lirith::Input::Keys::A             ; @move_left = false
-        when Lirith::Input::Keys::S             ; @move_backward = false
-        when Lirith::Input::Keys::D             ; @move_right = false
-
-        when Lirith::Input::Keys::Q             ; @translate_left = false
-        when Lirith::Input::Keys::E             ; @translate_right = false
+        when Lirith::Input::Keys::W; @move_forward = false
+        when Lirith::Input::Keys::A; @move_left = false
+        when Lirith::Input::Keys::S; @move_backward = false
+        when Lirith::Input::Keys::D; @move_right = false
+        when Lirith::Input::Keys::Q; @translate_left = false
+        when Lirith::Input::Keys::E; @translate_right = false
         end
       end
 
       def randomize_mesh
         if Lirith.application.scene.children.first.is_a?(Lirith::Objects::Mesh)
           mesh = Lirith.application.scene.children.first
-
-          mesh.vertices.first.position.x -= 1_f32
-          mesh.needs_update = true
+          mesh.rotate_x Lirith::Math.deg2rad(1.0)
+          mesh.update_view
+          # mesh.vertices.first.position.x -= 1_f32
+          # mesh.needs_update = true
         end
       end
 
+      def debug_camera
+        p Lirith.application.camera
+      end
+
       def check_mouse
-        Lirith.application.camera.quaternion.y += 0.01 if @translate_left
-        Lirith.application.camera.quaternion.y -= 0.01 if @translate_right
+        Lirith.application.camera.rotate_y(Lirith::Math.deg2rad(1.0)) if @translate_left
+        Lirith.application.camera.rotate_y(Lirith::Math.deg2rad(-1.0)) if @translate_right
 
         Lirith.application.camera.update_view if @translate_left || @translate_right
 
@@ -70,8 +74,8 @@ module LirithApp
 
       def handle_event(event)
         case event
-        when Events::Render::StartPaint; check_mouse && move
-        when Lirith::Events::Input::KeyPressed; handle_key_press(event.key)
+        when Events::Render::StartPaint        ; check_mouse && move
+        when Lirith::Events::Input::KeyPressed ; handle_key_press(event.key)
         when Lirith::Events::Input::KeyReleased; handle_key_release(event.key)
         end
       end
