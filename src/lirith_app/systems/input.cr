@@ -39,9 +39,10 @@ module LirithApp
 
       def randomize_mesh
         if Lirith.application.scene.children.first.is_a?(Lirith::Objects::Mesh)
-          mesh = Lirith.application.scene.children.first
-          mesh.rotate_x Lirith::Math.deg2rad(1.0)
-          mesh.update_view
+          Lirith.application.scene.children.each do |m|
+            m.rotate_x Lirith::Math.deg2rad(1.0)
+            m.update_view
+          end
           # mesh.vertices.first.position.x -= 1_f32
           # mesh.needs_update = true
         end

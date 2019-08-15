@@ -5,6 +5,7 @@ module LirithApp
         @model = Models::Cube.new
         loader = Lirith::Loaders::JsonLoader.new
         mesh = loader.load(File.open("./src/lirith_app/models/cube.json"))
+        mesh.texture = Lirith::Texture.new(File.open("./src/lirith_app/textures/uvtemplate.bmp"))
         Lirith.application.scene.children << mesh
 
         mesh2 = mesh.clone
@@ -18,9 +19,11 @@ module LirithApp
         mesh3.update_view
         Lirith.application.scene.children << mesh3
 
-        plane = Lirith::Objects::Plane.create(2, 2, 2, 2)
-        plane.rotate_x Lirith::Math.deg2rad(90.0)
-        plane.translate_z 0.1
+        plane = Lirith::Objects::Plane.create(2, 2, 1, 1)
+        #plane.rotate_x Lirith::Math.deg2rad(90.0)
+        plane.translate_z 6
+        plane.translate_x -1
+        plane.translate_y -1
         plane.update_view
         Lirith.application.scene.children << plane
       end
