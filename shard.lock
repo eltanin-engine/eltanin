@@ -24,3 +24,7 @@ shards:
     path: ../opengl
     version: 0.1.0
 
+  r_image:
+    path: ../r_image
+    version: 0.1.0
+
