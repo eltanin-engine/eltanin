@@ -6,9 +6,8 @@ module LirithApp
           image: RImage::Formats::Bitmap.new(File.open("./src/lirith_app/textures/uvtemplate.bmp"))
         )
 
-        @model = Models::Cube.new
         loader = Lirith::Loaders::JsonLoader.new
-        mesh = loader.load(File.open("./src/lirith_app/models/cube.json"))
+        mesh = loader.load(File.open("./src/lirith_app/models/cubes/cube.json"))
         mesh.texture = texture
         #Lirith.application.scene.children << mesh
 
@@ -16,24 +15,30 @@ module LirithApp
         # mesh2 = loader.load(File.open("./src/lirith_app/models/cube.json"))
         mesh2.position.x -= 2
         mesh2.update_view
-        #Lirith.application.scene.children << mesh2
+        # Lirith.application.scene.children << mesh2
 
-        mesh3 = loader.load(File.open("./src/lirith_app/models/cube.json"))
+        mesh3 = loader.load(File.open("./src/lirith_app/models/cubes/cube.json"))
         mesh3.position.x += 2
         mesh3.update_view
-        #Lirith.application.scene.children << mesh3
+        # Lirith.application.scene.children << mesh3
 
         plane = Lirith::Objects::Plane.create(2, 2, 2, 2)
-        #plane.rotate_x Lirith::Math.deg2rad(90.0)
+        # plane.rotate_x Lirith::Math.deg2rad(90.0)
         plane.translate_z 6
         plane.translate_x -1
         plane.translate_y -1
         plane.update_view
         plane.texture = texture
-        #Lirith.application.scene.children << plane
+        Lirith.application.scene.children << plane
 
         obj_loader = Lirith::Loaders::ObjLoader.new
-        obj_mesh = obj_loader.load(File.open("./src/lirith_app/models/cube.obj"))
+        #obj_mesh = obj_loader.load(File.open("./src/lirith_app/models/cubes/cube.obj"))
+        #obj_mesh = obj_loader.load(File.open("./src/lirith_app/models/male02/male02.obj"))
+        #obj_mesh.scale = Lirith::Math::Vector3.new(0.01, 0.01, 0.01)
+        #obj_mesh.translate_y -1
+        # obj_mesh = obj_loader.load(File.open("./src/lirith_app/models/cubes/cubes.obj"))
+        obj_mesh = obj_loader.load(File.open("./src/lirith_app/models/antler.obj"))
+        obj_mesh.update_view
         obj_mesh.texture = texture
         Lirith.application.scene.children << obj_mesh
       end

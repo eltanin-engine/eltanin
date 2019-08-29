@@ -1,5 +1,4 @@
 require "lirith"
-require "./lirith_app/models/*"
 require "./lirith_app/events"
 require "./lirith_app/systems"
 require "./lirith_app/version"
