@@ -23,7 +23,7 @@ module LirithApp
 
         Lirith::Managers::System.trigger_event(Events::Render::EndPaint)
 
-        Lirith.application.renderer.render(Lirith.application.scene, Lirith.application.camera)
+        Lirith.application.renderer.render
         # LibGL.polygon_mode(LibGL::E_FRONT_AND_BACK, LibGL::E_LINE)
 
         Lirith::Managers::System.trigger_event(Events::Render::FinalizePaint)

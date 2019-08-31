@@ -5,6 +5,8 @@ module LirithApp
       @move_backward = false
       @move_left = false
       @move_right = false
+      @move_up = false
+      @move_down = false
 
       @translate_left = false
       @translate_right = false
@@ -17,6 +19,8 @@ module LirithApp
         when Lirith::Input::Keys::A             ; @move_left = true
         when Lirith::Input::Keys::S             ; @move_backward = true
         when Lirith::Input::Keys::D             ; @move_right = true
+        when Lirith::Input::Keys::LeftShift     ; @move_up = true
+        when Lirith::Input::Keys::LeftControl   ; @move_down = true
         when Lirith::Input::Keys::Q             ; @translate_left = true
         when Lirith::Input::Keys::E             ; @translate_right = true
         when Lirith::Input::Keys::R             ; randomize_mesh
@@ -28,12 +32,14 @@ module LirithApp
 
       def handle_key_release(key)
         case key
-        when Lirith::Input::Keys::W; @move_forward = false
-        when Lirith::Input::Keys::A; @move_left = false
-        when Lirith::Input::Keys::S; @move_backward = false
-        when Lirith::Input::Keys::D; @move_right = false
-        when Lirith::Input::Keys::Q; @translate_left = false
-        when Lirith::Input::Keys::E; @translate_right = false
+        when Lirith::Input::Keys::W          ; @move_forward = false
+        when Lirith::Input::Keys::A          ; @move_left = false
+        when Lirith::Input::Keys::S          ; @move_backward = false
+        when Lirith::Input::Keys::D          ; @move_right = false
+        when Lirith::Input::Keys::Q          ; @translate_left = false
+        when Lirith::Input::Keys::E          ; @translate_right = false
+        when Lirith::Input::Keys::LeftShift  ; @move_up = false
+        when Lirith::Input::Keys::LeftControl; @move_down = false
         end
       end
 
@@ -68,7 +74,10 @@ module LirithApp
         Lirith.application.camera.translate_x -0.1 if @move_left
         Lirith.application.camera.translate_x 0.1 if @move_right
 
-        Lirith.application.camera.update_view if @move_forward || @move_backward || @move_left || @move_right
+        Lirith.application.camera.translate_y 0.1 if @move_up
+        Lirith.application.camera.translate_y -0.1 if @move_down
+
+        Lirith.application.camera.update_view if @move_forward || @move_backward || @move_left || @move_right || @move_up || @move_down
 
         true
       end
