@@ -1,4 +1,4 @@
-name: lirith_app
+name: eltanin
 version: 0.1.0
 
 authors:
@@ -6,12 +6,12 @@ authors:
 
 targets:
   lirith_app:
-    main: src/lirith_app.cr
+    main: src/eltanin.cr
 
 dependencies:
   lirith:
     path: ../lirith
-    github: lirith-engine/lirith
+    github: eltanin-engine/lirith
 
 crystal: 0.23.1
 

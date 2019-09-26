@@ -1,7 +1,7 @@
-module LirithApp
+module Eltanin
   module Events
     module Render
-      struct Started < Lirith::Events::Base
+      struct EndPaint < Lirith::Events::Base
       end
     end
   end

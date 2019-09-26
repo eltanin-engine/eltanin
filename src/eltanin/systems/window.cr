@@ -1,4 +1,4 @@
-module LirithApp
+module Eltanin
   module Systems
     class Window < Lirith::Systems::Base
       def initialize
@@ -6,7 +6,7 @@ module LirithApp
 
       def shut_down
         LibGLFW.terminate
-        Lirith::Managers::System.trigger_event(LirithApp::Events::Window::Closed)
+        Lirith::Managers::System.trigger_event(Eltanin::Events::Window::Closed)
 
         true
       end

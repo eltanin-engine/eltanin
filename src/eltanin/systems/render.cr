@@ -1,4 +1,4 @@
-module LirithApp
+module Eltanin
   module Systems
     class Render < Lirith::Systems::Base
       getter running = false

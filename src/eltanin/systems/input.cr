@@ -1,4 +1,4 @@
-module LirithApp
+module Eltanin
   module Systems
     class Input < Lirith::Systems::Base
       @move_forward = false

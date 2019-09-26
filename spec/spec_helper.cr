@@ -1,2 +1,2 @@
 require "spec"
-require "../src/lirith_app"
+require "../src/eltanin"

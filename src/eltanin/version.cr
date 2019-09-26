@@ -1,3 +1,3 @@
-module LirithApp
+module Eltanin
   VERSION = "0.1.0"
 end

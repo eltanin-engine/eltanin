@@ -1,6 +1,6 @@
 require "./spec_helper"
 
-describe LirithApp do
+describe Eltanin do
   # TODO: Write tests
 
   it "works" do

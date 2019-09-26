@@ -1,16 +1,16 @@
 require "lirith"
-require "./lirith_app/events"
-require "./lirith_app/systems"
-require "./lirith_app/version"
+require "./eltanin/events"
+require "./eltanin/systems"
+require "./eltanin/version"
 
-module LirithApp
+module Eltanin
   class Application < Lirith::Application
     def setup
       Lirith::Managers::System.instance.register(Lirith::Systems::Console.new([
-        LirithApp::Events::Render::EndPaint,
-        LirithApp::Events::Render::StartPaint,
-        LirithApp::Events::Render::FinalizePaint,
-        LirithApp::Events::Render::Finalized,
+        Eltanin::Events::Render::EndPaint,
+        Eltanin::Events::Render::StartPaint,
+        Eltanin::Events::Render::FinalizePaint,
+        Eltanin::Events::Render::Finalized,
         Lirith::Events::Input::KeyPressed,
         Lirith::Events::Input::KeyReleased,
       ]))
@@ -23,4 +23,4 @@ module LirithApp
   end
 end
 
-LirithApp::Application.new
+Eltanin::Application.new

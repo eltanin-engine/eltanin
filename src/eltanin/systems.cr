@@ -1,4 +1,4 @@
-module LirithApp
+module Eltanin
   module Systems
   end
 end

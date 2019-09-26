@@ -1,4 +1,4 @@
-module LirithApp
+module Eltanin
   module Systems
     class Clock < Lirith::Systems::Base
     end

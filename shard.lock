@@ -9,7 +9,7 @@ shards:
     version: 0.1.1
 
   lib_glew:
-    github: lirith-engine/lib_glew
+    github: eltanin-engine/lib_glew
     commit: 50773a1cd412a9f82f84a79b9663e284f27b6666
 
   lib_glfw:
